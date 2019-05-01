@@ -19,6 +19,8 @@ function setEnvVar(prefix, data){
   }
 }
 
-function setEnvVar(){
+function initiateSetEnvVar(){
   setEnvVar("resp.", jsonData);
 }
+
+initiateSetEnvVar();
