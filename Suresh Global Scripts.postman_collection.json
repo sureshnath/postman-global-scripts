@@ -1,0 +1,47 @@
+{
+	"info": {
+		"_postman_id": "f628d78b-bc2f-4e9f-9f8b-41158216efb0",
+		"name": "Suresh Global Scripts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Set scripts variables",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "59170671-8faf-4cf2-b23d-53523f080655",
+						"exec": [
+							"// This will set global script variables",
+							"pm.globals.set(\"scripts.all\", \"\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://postman-echo.com/delay/1",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"delay",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
