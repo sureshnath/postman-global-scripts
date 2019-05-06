@@ -14,7 +14,66 @@
 						"id": "59170671-8faf-4cf2-b23d-53523f080655",
 						"exec": [
 							"// This will set global script variables",
-							"pm.globals.set(\"scripts.all\", \"\");",
+							"var globalScriptAll = 'scripts.all'",
+							"pm.globals.set(globalScriptAll, \"\");",
+							"",
+							"function addScript(scriptLocation){",
+							"    pm.sendRequest(scriptLocation, function (err, res) {",
+							"        console.log(\"Script Location: \"+ scriptLocation + (err ? \" fetch error: \" + err : ' fetched successfully'));",
+							"        var scriptSoFar = pm.globals.get(globalScriptAll);",
+							"        scriptSoFar = scriptSoFar + \"\\n // adding script from location - \" + scriptLocation + \"\\n\" + res.text();",
+							"        pm.globals.set(globalScriptAll, scriptSoFar);",
+							"    });    ",
+							"}",
+							"",
+							"addScript('https://raw.githubusercontent.com/sureshnath/postman-global-scripts/master/postman-bigint-min.js');",
+							"addScript('https://raw.githubusercontent.com/sureshnath/postman-global-scripts/master/postman-logging-with-level.js');",
+							"// addScript('https://raw.githubusercontent.com/sureshnath/postman-global-scripts/master/postman-set-response-as-env-var.js');",
+							"",
+							"pm.test(\"Response time is less than 2secs\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://postman-echo.com/delay/1",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"delay",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Scripts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "59170671-8faf-4cf2-b23d-53523f080655",
+						"exec": [
+							"eval(pm.globals.get('scripts.all'));",
+							"",
+							"pm.test(\"Response time is less than 2secs\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});",
 							""
 						],
 						"type": "text/javascript"
